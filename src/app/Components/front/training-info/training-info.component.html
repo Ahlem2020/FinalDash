@@ -1,0 +1,76 @@
+<div class="row">
+  <div class="col-md-2">
+    Adds
+  </div>
+
+  <div class="col-md-6">
+    <div>
+      <h1 class=" mb-2 mt-5">{{training.subject}}</h1>
+      <!-- <div class="col-lg-6 order-1 order-lg-2 text-center aos-init aos-animate" data-aos="fade-up" data-aos-delay="200">
+        <img src="{{'./assets/images/'+training.image}}" alt=" Training Image" class="img-fluid">
+      </div> -->
+      <div class=" justify-content-center" data-aos="fade-up"  data-aos-delay="200">
+        <img src="./assets/images/training/t1.jpg" alt=" Training Image" class="img-fluid" >
+      </div>
+      <b>Description :</b>
+      <p>{{training.description}}</p>
+      <div>
+        <b>Trainer : </b> {{training.trainerName}}
+      </div>
+      <div>
+        <b>{{training.startDate}}</b> 
+      </div>
+      <div>
+        <b>Price : <ng-container *ngIf="training.price == 0; then thenTemplate; else elseTemplate"></ng-container>
+        <ng-template #thenTemplate>
+            Free
+        </ng-template>
+        <ng-template #elseTemplate>
+            {{training.price}}
+        </ng-template>
+        </b>
+      </div>
+
+    </div>
+    <div class="row mt-3">
+        <div class="col-md-2">
+            <div class=" justify-content-center" data-aos="fade-up"  data-aos-delay="200" style="width: 100px;">
+                <img src="./assets/images/training/q.png" alt=" Training Image" class="img-fluid" (click)="checkQuiz(training.quiz.id)">
+              </div>
+        </div>
+        <div class="col-md-3">
+            <b (click)="checkQuiz(training.quiz.id)" class="bnt ">Check quiz</b>
+        </div>
+        <!-- <ng-container *ngIf="participated==false; then thenTemplate; else elseTemplate"></ng-container>
+        <ng-template #thenTemplate>
+          <b (click)="participate()" class="bnt btn-outline-primary">Participate</b>
+        </ng-template>
+        <ng-template #elseTemplate>
+          <b (click)="participate()" class="bnt btn-outline-success">Participate</b>
+        </ng-template> -->
+      
+    </div>
+    
+  </div>
+  <div class="col-md-4">
+    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+      <div class="carousel-inner" style="height: 700px;">
+        <div class="carousel-item active">
+          <img class="d-block w-100" src="assets/images/training/11.jpg" alt="First slide">
+        </div>
+        <div class="carousel-item">
+          <img class="d-block w-100" src="assets/images/training/12.jpg" alt="Second slide">
+        </div>
+
+      </div>
+      <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+  </div>
+</div>
