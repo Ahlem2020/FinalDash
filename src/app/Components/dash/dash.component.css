@@ -1,3 +1,7 @@
-.c1{
-    padding-left: 14%!important;
+h5.card-title.text-primary{
+    color:#e38fa0 !important;
+}
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    color: #fff;
+    background-color: #e38fa0;
 }
