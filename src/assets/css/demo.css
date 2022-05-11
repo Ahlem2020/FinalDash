@@ -12,6 +12,20 @@
   width: 22px;
   height: 38px;
 }
+.add_jackpot{
+
+  
+
+margin-left: 42%;
+}
+.ditant{
+  margin-left: 1;
+}
+.cardm{
+  margin: 2px;
+
+  margin-left: 3%;
+}
 
 .app-brand-text.demo {
   font-size: 1.75rem;
@@ -34,9 +48,19 @@
   z-index: auto;
 }
 
+.a{
+  background-color:rgb(32, 105, 141);
+  columns: md -4px;
+padding-bottom: 5px;
+scroll-padding-top: 10%;
+  }
+
 /*
 * Content
 ******************************************************************************/
+
+
+
 
 .demo-blocks > * {
   display: block !important;
