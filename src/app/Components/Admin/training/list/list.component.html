@@ -1,0 +1,505 @@
+<!--Form-new-Training-->
+<!-- <div *ngIf="show_form_new" class="col-md-12 mr-5">
+  
+  <div class="row">
+
+    <div class="col-">
+      <div class="card">
+        
+       
+        <div class="modal fade show" id="basicModal" tabindex="-1" style="display: block;" aria-modal="true"
+          role="dialog">
+          <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel1">New training</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                  (click)="show_list()"></button>
+              </div>
+              <div class="modal-body">
+                <form (ngSubmit)="onSubmit()" style="padding-left: 50px; padding-right: 50px;">
+                  <div class="form-group">
+                    <label><b>Subject : </b></label>
+                    <input type="text" name="subject" class="form-control" required [(ngModel)]="training.subject">
+                  </div>
+                  <div class="form-group">
+                    <label><b>Description : </b></label>
+                    <input type="text" name="description" class="form-control" required
+                      [(ngModel)]="training.description">
+                  </div>
+                  <div class="form-group">
+                    <label><b>Start date : </b></label>
+                    <input type="date" name="startDate" class="form-control" required [(ngModel)]="training.startDate">
+                  </div>
+                  <div class="form-group">
+                    <label><b>End date : </b></label>
+                    <input type="date" name="endDate" class="form-control" required [(ngModel)]="training.endDate">
+                  </div>
+                  <div class="form-group">
+                    <label><b>Capacity : </b></label>
+                    <input type="number" name="capacity" class="form-control" min=0 [disabled] required
+                      [(ngModel)]="training.nbreMax">
+                  </div>
+
+                  <div class="form-group">
+                    <label><b>Domain : </b></label>
+                    <select class="form-control" id="r4" required [ngModel]="training.domain"
+                    (ngModelChange)="onChange($event)" name="deviceText">
+                      <option [value]="domain" *ngFor="let domain of domains">{{domain}}</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label><b>Attach : </b></label>
+                    <img style="width: 100px;" class="mb-2 mt-1" [src]="urllink" *ngIf="urllink">
+                    <input type="file" name="image" class="form-control" min=0 [disabled] required
+                      (change)="selectFiles($event)" [(ngModel)]="training.image">
+                  </div>
+
+                  <div class="form-group">
+                    <label><b>Trainer name : </b></label>
+                    <input type="text" name="trainer" class="form-control" required [(ngModel)]="training.trainerName">
+                  </div>
+
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="isCertified"
+                      [(ngModel)]="training.isCertified">
+                    <label class="form-check-label" for="isCertified">
+                      <b>Certified</b>
+                    </label>
+                  </div>
+
+
+
+
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal"
+                      (click)="show_list()">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+
+      </div>
+      <div class="pl-3">
+
+      </div>
+    </div>
+  </div>
+</div> -->
+<!--end-Form-->
+  <div *ngIf="list" class="card mt-2">
+  <div class="card-header">
+    <div class="row col-md-10">
+      <div class="col-md-1">
+        <a class="nav-link" routerLink="/training" [routerLinkActive]="['active']"
+        [routerLinkActiveOptions]="{exact:true}">List |</a> 
+      </div>
+      <div class="col-md-2">
+        <a class="nav-link" routerLink="/create-training" [routerLinkActive]="['active']"
+        [routerLinkActiveOptions]="{exact:true}">Create training</a>
+      </div>
+       
+    </div>
+    
+  </div>
+  <div  class="card-body">
+        <div class="navbar">
+          <input type="text" name="search_Text" class="form-control" [(ngModel)]="search_Text"
+            (ngModelChange)="search()" placeholder="Search">
+        </div>
+
+        <div class="table-responsive text-nowrap">
+          <table class="table">
+            <thead class="table-light">
+              <tr>
+                <th  (click)="sort('id')">ID&nbsp;<i class="fa fa-sort"></i></th>
+                <th>Image</th>
+                <th (click)="sort('domain')">Domain&nbsp;<i class="fa fa-sort"></i></th>
+                <th (click)="sort('subject')">Subject&nbsp;<i class="fa fa-sort"></i></th>
+                <th (click)="sort('startDate')">Start date&nbsp;<i class="fa fa-sort"></i></th>
+                <th (click)="sort('endDate')">Duration&nbsp;<i class="fa fa-sort"></i></th>
+                <th (click)="sort('nbreMax')">Trainer&nbsp;<i class="fa fa-sort"></i></th>
+                <th (click)="sort('nbreParticipation')">Inscriptions count&nbsp;<i class="fa fa-sort"></i></th>
+                <th (click)="sort('note')">Quiz ID&nbsp;<i class="fa fa-sort"></i></th>
+              </tr>
+            </thead>
+            <tbody class="table-border-bottom-0">
+              
+
+              <tr *ngFor="let t of listTrainings | orderBy:key:reverse | paginate:{itemsPerPage:10,currentPage:p};">
+                <td class="align-middle">{{t.id}}</td>
+                <td><img src="{{'./assets/images/training/'+t.image}}" width="50" height="50"></td>
+                <td class="align-middle">{{t.domain}}</td>
+                <td class="align-middle">{{t.subject}}</td>
+                <td class="align-middle">{{t.startDate}}</td>
+                <td class="align-middle">{{t.duration}} &nbsp; days </td>
+                <td class="align-middle">{{t.trainerName}}</td>
+                <td class="align-middle" style="text-align: center;">{{t.nbreParticipation}}</td>
+                <td class="align-middle" style="text-align: center;" (click)="detailsTraining(t)"  name="deviceText"></td>
+                <td class="align-middle">
+                  <button class="btn btn-outline-primary" (click)="detailsTraining(t)">
+                   Details
+                  </button>
+                  <!-- <button class="btn btn-outline-success" (click)="updateTraining(t.id)">
+                    Update</button> -->
+                    <button class="btn btn-outline-success" (click)="show_update_form(t)">
+                      Update</button>
+                  <button class="btn btn-outline-danger" (click)="clickMethod(t.id)">
+                   Delete
+                  </button>                  
+                </td>
+              </tr>
+            </tbody>
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+          </table>
+        </div>
+
+      </div>
+      <div class="pl-3">
+
+      </div>
+    </div>
+ 
+<!-- Modif Training -->
+<div *ngIf="Update_form" class="card mt-2">
+  <div class="card-header">
+    <div class="row col-md-10">
+      <div class="col-md-1">
+        <a class="nav-link" routerLink="/training" [routerLinkActive]="['active']"
+          [routerLinkActiveOptions]="{exact:true}">List |</a>
+      </div>
+      <div class="col-md-2">
+        <a class="nav-link" routerLink="/create-training" [routerLinkActive]="['active']"
+          [routerLinkActiveOptions]="{exact:true}">Create training</a>
+      </div>
+
+    </div>
+
+  </div>
+  <div class="card-body container">
+    <form class="mt-5 ml-5" [formGroup]="form">
+
+      <div class="row col-md-10">
+        <div class="form-group">
+          <label><b>Subject : </b></label>
+          <input type="text" name="subject" class="form-control" formControlName="subject" required>
+          <small *ngIf="subject.invalid && subject.touched" class="text-danger">Subject is required</small>
+        </div>
+      </div>
+      <div class="row col-md-10">
+
+        <div class="form-group">
+          <label><b>Domain : </b></label>
+          <select class="form-control" id="r4" required (ngModelChange)="onChange($event)" formControlName="domain"
+            name="deviceText">
+            <option [value]="domain" *ngFor="let domain of domains">{{domain}}</option>
+          </select>
+          <small *ngIf="domain.invalid && domain.touched" class="text-danger">Domain is required</small>
+        </div>
+      </div>
+      <div class="row col-md-10">
+        <div class="form-group">
+          <label><b>Lavel : </b></label>
+          <select class="form-control" id="r4" required (ngModelChange)="onChange($event)" formControlName="level"
+            name="deviceText">
+            <option [value]="level" *ngFor="let level of levels">{{level}}</option>
+          </select>
+          <small *ngIf="level.invalid && level.touched" class="text-danger">Level is required</small>
+        </div>
+      </div>
+
+      <div class="row col-md-10">
+        <div class="form-group">
+          <label><b>Description : </b></label>
+          <div class="form-floating">
+            <textarea name="description" class="form-control" placeholder="Description" id="floatingTextarea"
+              formControlName="description"></textarea>
+            <small *ngIf="description.invalid && description.touched" class="text-danger">Description is required</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="row col-md-10">
+        <div class="col-md-8">
+          <div class="form-group">
+            <label><b>Start date : </b></label>
+            <input type="date" name="startDate" class="form-control" required formControlName="startDate">
+            <small *ngIf="startDate.invalid && startDate.touched" class="text-danger">Start date is required</small>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label><b>Duration : </b></label>
+            <input type="number" min="1" name="startDate" class="form-control" required formControlName="duration">
+            <small *ngIf="duration.invalid && duration.touched" class="text-danger">Duration is required</small>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- <div class="row col-md-10">
+          <div class="form-group">
+            <label><b>End date : </b></label>
+            <input type="date" name="endDate" class="form-control" required formControlName="endDate" (ngModelChange)="validEndDate()" >
+            <small *ngIf="endDate.invalid && endDate.touched" class="text-danger" >Subject is required</small>
+          </div>
+        </div> -->
+
+
+      <div class="row col-md-10">
+        <div class="form-group">
+          <label><b>Trainer name : </b></label>
+          <input type="text" name="trainer" class="form-control" required formControlName="trainerName">
+          <small *ngIf="trainerName.invalid && trainerName.touched" class="text-danger">Name of trainer is required</small>
+        </div>
+      </div>
+
+      <div class="row col-md-10">
+        <div class="form-group">
+          <label><b>Capacity : </b></label>
+          <input type="number" name="nbreMax" class="form-control" min=0 [disabled] required formControlName="nbreMax"
+            onkeyup="if(this.value<0){this.value= this.value * -1}">
+          <small *ngIf="nbreMax.invalid && nbreMax.touched" class="text-danger">Number max of learners is required</small>
+        </div>
+      </div>
+
+      <div class="row col-md-10">
+        <div class="form-group">
+          <label><b>Price : </b></label>
+          <input type="number" name="price" class="form-control" min=0 [disabled] required formControlName="price"
+            onkeyup="if(this.value<0){this.value= this.value * -1}">
+          <small *ngIf="price.invalid && price.touched" class="text-danger">Price  is required</small>
+        </div>
+      </div>
+
+
+
+
+      <div class="row col-md-10">
+        <div class="form-group">
+          <label><b>Attach : </b></label>
+          <input type="file" accept="image/*" (change)="onSelectFile($event)">
+          <img src="{{'./assets/images/training/'+training.image}}"   style="width: 100px;">
+
+          <!-- <img style="width: 100px;" class="mb-2 mt-1" [src]="imgURL" *ngIf="imgURL"> -->
+          <!--  <input type="file" name="file" class="form-control" min=0 [disabled] required (change)="onSelectFiles($event) "
+             [(ngModel)]="training.image" accept="image/*"> -->
+          <!-- <input
+              #file
+              type="file"
+              accept="image/*"
+              (change)="preview(file.files)"
+          /> -->
+          <!-- <input type="file" (change)="onFileChanged($event)"> -->
+          <!-- <img [src]="imgURL" height="200" *ngIf="imgURL"> -->
+
+        </div>
+      </div>
+
+      <div class="row col-md-10">
+
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="isCertified" formControlName="isCertified">
+          <label class="form-check-label" for="isCertified">
+            <b>Certified</b>
+          </label>
+        </div>
+      </div>
+
+
+      <div class="row col-md-10 mt-3">
+        <button [disabled]="form.invalid" (click)="onSave()" class="btn btn-dark"><i class="fa fa-database"></i>
+          Submit</button>
+        <!-- <button type="submit" class="btn btn-primary" (click)="saveForm(reactiveForm)" [disabled]="form.invalid">Save</button> -->
+      </div>
+
+
+
+
+
+
+    </form>
+
+  </div>
+</div>
+
+
+<!-- Fin modif training -->
+
+
+<!--Update-Form-->
+
+
+<!-- <div *ngIf="Update_form" class="col-md-12 mr-5">
+  
+  <div class="row">
+
+    <div class="col-">
+      <div class="card">
+       
+       
+        <div class="modal fade show" id="basicModal" tabindex="-1" style="display: block;" aria-modal="true"
+          role="dialog">
+          <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel1">Update training</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                  (click)="show_list()"></button>
+              </div>
+              <div class="modal-body">
+                <form (ngSubmit)="onSubmit()" style="padding-left: 50px; padding-right: 50px;">
+                  <div class="form-group">
+                    <label><b>Subject : </b></label>
+                    <input type="text" name="subject" class="form-control" required [(ngModel)]="training.subject">
+                  </div>
+                  <div class="form-group">
+                    <label><b>Description : </b></label>
+                    <input type="text" name="description" class="form-control" required
+                      [(ngModel)]="training.description">
+                  </div>
+                  <div class="form-group">
+                    <label><b>Start date : </b></label>
+                    <input type="date" name="startDate" class="form-control" required [(ngModel)]="training.startDate">
+                  </div>
+                  <div class="form-group">
+                    <label><b>End date : </b></label>
+                    <input type="date" name="endDate" class="form-control" required [(ngModel)]="training.endDate">
+                  </div>
+                  <div class="form-group">
+                    <label><b>Capacity : </b></label>
+                    <input type="number" name="capacity" class="form-control" min=0 [disabled] required
+                      [(ngModel)]="training.nbreMax">
+                  </div>
+
+                  <div class="form-group">
+                    <label><b>Domain : </b></label>
+                    <select class="form-control" id="r4" required [ngModel]="training.domain"
+                    (ngModelChange)="onChange($event)" name="deviceText">
+                      <option [value]="domain" *ngFor="let domain of domains">{{domain}}</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label><b>Attach : </b></label>
+                    <img style="width: 100px;" class="mb-2 mt-1" [src]="urllink" *ngIf="urllink">
+                    <input type="file" name="image" class="form-control" min=0 [disabled] required
+                      (change)="selectFiles($event)" [(ngModel)]="training.image">
+                  </div>
+
+                  <div class="form-group">
+                    <label><b>Trainer name : </b></label>
+                    <input type="text" name="trainer" class="form-control" required [(ngModel)]="training.trainerName">
+                  </div>
+
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="isCertified"
+                      [(ngModel)]="training.isCertified">
+                    <label class="form-check-label" for="isCertified">
+                      <b>Certified</b>
+                    </label>
+                  </div>
+
+
+
+
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal"
+                      (click)="show_list()">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+       
+
+      </div>
+      <div class="pl-3">
+
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<!--end-Update-Form-->
+
+
+<!--Detail-training-->
+
+
+<div *ngIf="detail" class="col-md-12 mr-5">
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+            <li class="breadcrumb-item active" (click)="show_list()">Training</li>
+            <li class="breadcrumb-item active">{{training.subject}}</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="row">
+
+    <div class="col-">
+      <div class="card">
+        <div class="card-header row">
+
+
+          <h3 class="card-title col-md-9">{{training.subject}}</h3>
+
+        </div>
+        
+        <div class="modal fade show mt-5" id="basicModal" tabindex="-1" style="display: block;" aria-modal="true"
+          role="dialog">
+          <div class="modal-dialog modal-lg mt-5" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel1">{{training.subject}}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                  (click)="show_list()"></button>
+              </div>
+              <div class="modal-body">
+                <div class="tab-pane active show" id="tab-1">
+                  <div class="row">
+                    <div class="col-lg-6 order-2 order-lg-1 mt-3 mt-lg-0 aos-init aos-animate" data-aos="fade-up"
+                      data-aos-delay="100"> 
+                      <p>{{training.description}}</p>
+                      <div>
+                        Trainer : <b>{{training.trainerName}}</b>
+                      </div>
+                      <div>
+                        <b>{{training.startDate}}</b>
+                      </div>
+                      
+                    </div>
+                    <div class="col-lg-6 order-1 order-lg-2 text-center aos-init aos-animate" data-aos="fade-up"
+                      data-aos-delay="200"> <img src="{{'./assets/images/'+training.image}}" alt="" class="img-fluid"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+
+      </div>
+      <div class="pl-3">
+
+      </div>
+    </div>
+  </div>
+</div>
+<!--end-Form-->
+<!--End Detail training-->
+
