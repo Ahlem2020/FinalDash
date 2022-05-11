@@ -1,0 +1,189 @@
+<p>list of Jobs</p>
+
+<div>
+    <button  onclick="document.getElementById('id06').style.display='block'"   class="block">Add Job</button>
+    <div id="id06" class="modal">
+        <span onclick="document.getElementById('id06').style.display='none'" class="close" title="Close Modal">&times;</span>
+       
+        <!-- alert -->
+        <form class="modal-content" action="/action_page.php" (ngSubmit)="handelSubmit">
+         <div class="container">
+           <h1>Add New JobOffer</h1>
+           <form [formGroup]="jobOfferForm" >
+            <label> poste
+            <input type="text" formControlName="poste" class="B1">
+            </label>
+            <br> <br>
+        <label>  place
+        <input type="text" formControlName="place" >
+        </label>
+        <br>
+        <br> <br>
+        <label>salary
+        <input type="number" formControlName="salary"  >
+        </label>
+        <br>
+        <br> <br>
+        <label> created_at
+        <input type="datetime" formControlName="created_at" >
+        </label>
+        <br>
+        <br> <br>
+
+        <label>validate_at
+            <input type="datetime" formControlName="validate_at"  >
+            </label>
+            <br> <br> 
+            <label>file
+            <input type="file" formControlName="file">
+            </label>
+            <br>
+         
+        
+                <label> description
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                     
+                    </div>
+                    <textarea type="text" class="form-control" aria-label="With textarea" formControlName="description"  >description</textarea>
+                  </div>
+                </label>
+                <br>
+               
+                <br>
+           <div class="clearfix">
+             <button type="button" class="cancelbtn" onclick="document.getElementById('id06').style.display='none'"  title="Close Modal">Cancel</button>
+                 
+             <button  value="Add Job" class="cancelbtn" (click)="addJobOffer()" >Submit</button>
+            </div>
+     
+   </form></div></form></div>
+      </div>
+      
+   
+        <!-- alert -->
+
+
+
+     
+<div class="table-responsive">
+    
+    
+<table class="table">
+    <thead>
+      <tr>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">poste</th>
+            <th scope="col">description</th>
+            <th scope="col">place</th>
+            <th scope="col">salary</th>
+            <th scope="col">creation date</th>
+            <th scope="col">validation date</th>
+            <th scope="col">update date</th>
+            <th scope="col">update date</th>
+            
+          
+          </tr>
+     
+    </thead>
+    <tbody>
+        <tr *ngFor="let JobofferModule of listOfJobOffers">
+            <th scope="row">{{JobofferModule.idJOffer}}</th>
+            <td>{{JobofferModule.poste}}</td>
+            <td>{{JobofferModule.description}}</td>
+            <td>{{JobofferModule.place}}</td>
+            <td>{{JobofferModule.salary}}</td>
+            <td>{{JobofferModule.created_at }}</td>
+            <td>{{JobofferModule.validate_at }}</td>
+            <td>{{JobofferModule.update_at }}</td>
+            <td>{{JobofferModule.file }}</td>
+         
+            <td>
+                <button onclick="document.getElementById('id02').style.display='block'" >Delete</button>
+                <div id="id02" class="modal">
+                    <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
+                   <!-- alert -->
+                   <form class="modal-content" action="/action_page.php">
+                    <div class="container">
+                      <h1>Delete JobOffer</h1>
+                      <p>Are you sure you want to delete the JobOffer?</p>
+                
+                      <div class="clearfix">
+                        <button type="button" class="cancelbtn" onclick="document.getElementById('id02').style.display='none'"  title="Close Modal">Cancel</button>
+                        <button type="button" class="deletebtn" (click)="deleteJobOffer(JobofferModule.idJOffer)">Delete</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+                   <!-- alert -->
+            </td>
+          
+
+
+            <!--ButtonUpdate-->
+          
+            <td><button onclick="document.getElementById('id03').style.display='block'" (click)="UpdateJobOffer">Update</button></td>
+                <div id="id03" class="modal">
+                    <span onclick="document.getElementById('id03').style.display='none'" class="close" title="Close Modal">&times;</span>
+                
+ <!-- Modal -->
+ <form class="modal-content" action="/action_page.php">
+    <div class="container">
+      <h1>Update JobOffer</h1>
+     <!--form--> 
+     <form [formGroup]="jobOfferForm" >
+        <label> poste
+        <input type="text" formControlName="poste" class="B1">
+        </label>
+        
+        <br> <br>
+        <label>  place
+        <input type="text" formControlName="place"  class="B1">
+        </label>
+        <br>
+        <br> <br>
+        <label>salary
+        <input type="number" formControlName="salary"  class="B1">
+        </label>
+        <br>
+        <br> <br>
+        <label> created_at
+        <input type="datetime" formControlName="created_at"  class="B1">
+        </label>
+        <br>
+        <br> <br>
+        <label>validate_at
+        <input type="datetime" formControlName="validate_at"  class="B1">
+        </label>
+        <br> <br> 
+
+        <label> description
+        <div class="input-group">
+            <div class="input-group-prepend">
+             
+            </div>
+            <textarea type="text" class="form-control" aria-label="With textarea" formControlName="description"  class="B1">description</textarea>
+          </div>
+        </label>
+        <br>
+        <label>file
+        <input type="file" formControlName="file">
+        </label>
+        <br>
+        <br> <br>
+        <div class="clearfix">
+            <button type="button" class="cancelbtn"  onclick="document.getElementById('id03').style.display='none'"  title="Close Modal">Cancel</button>
+            <button type="button" class="deletebtn" >Update</button>
+          </div>
+       
+      </form>
+   </div>
+
+
+
+
+   
+
+
+
