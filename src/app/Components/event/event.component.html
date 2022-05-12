@@ -1,0 +1,86 @@
+
+<div class="cc"> 
+<table class="table table-striped">
+    <caption>List of Events</caption>
+    <thead >
+      <tr>
+        <th >Event Id</th>
+        <th >Description</th>
+        <th >Event Date</th>
+        <th >Domaine</th>
+        <th >End Date</th>
+        <th >Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let event of listofevent |paginate: { itemsPerPage: 3, currentPage: p }" >
+        <td>{{event.id}}</td>
+        <td>{{event.description}}</td>
+        <td>{{event.eventDate}}</td>
+        <td>{{event.domain}}</td>
+        <td>{{event.endDate}}</td>
+       <td><a class="btn btn-outline-primary" (click)="delete(event.id)">Delete</a></td>
+
+      </tr>
+    </tbody>
+  </table>
+  
+</div>
+<form >
+  
+    <div class="add_event"  >
+      <p style="margin-left: 470px;font-family: monospace;font-size: 24px;">ADD NEW EVENT</p>
+      <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#basicModal" (click)="showmodal()" style="font-size: 20px;margin-left: 533px;color: white;background-color: black;">
+         +
+        </button>
+  </div>
+  <div *ngIf="show" style="margin-right: 112px;">
+    <div id="basicModal" tabindex="-1" style="display: block;" aria-modal="true" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel1">ADD NEW EVENT</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="close()"></button>
+            </div>
+            <form  [formGroup]="eventForm"  (submit)="handleSubmit()">  
+                <div class="modal-body">
+             
+              <div class="row">
+                <div class="col mb-3">
+                  <label for="nameBasic" class="form-label">Description of the event </label>
+                  <input type="text"id="nameBasic" formControlName="description" class="form-control" placeholder="Enter the description of this event"/>
+                </div>
+               
+
+                 </div>
+           
+              <div class="row g-2">
+                <div class="col mb-0">
+                  <label class="form-label">Domain of this event</label>
+                  <input type="text" id="designation" formControlName="domain" class="form-control" placeholder="Enter the domain of this event">
+                </div>
+                
+              </div>
+              <div class="row g-2">
+                <div class="col mb-0">
+                  <label class="form-label">Date of the event</label>
+                  <input type="date" id="designation" formControlName="eventDate" class="form-control" placeholder="Type something like txt ...">
+                </div>
+                
+              </div>
+              <div class="row g-2">
+                <div class="col mb-0">
+                  <label class="form-label">Date end of  event</label>
+                  <input type="date" id="designation" formControlName="endDate" class="form-control" placeholder="Type something like txt ...">
+                </div>
+                
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" (click)="close()">Close</button>
+              <button type="submit"  [disabled]="!eventForm.valid" class="btn btn-outline-primary">Save changes</button>
+            </div>
+    
+  </form>
+
+  

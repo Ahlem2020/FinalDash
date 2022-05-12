@@ -1,3 +1,5 @@
+import { UpdateModuleComponent } from './Components/update-module/update-module.component';
+import { JackpotComponent } from './Components/jackpot/jackpot.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -7,11 +9,11 @@ import { AppComponent } from './app.component';
 import { DashComponent } from './Components/dash/dash.component';
 import { FooterComponent } from './Components/footer/footer.component';
 import { NavbarComponent } from './Components/navbar/navbar.component';
-import { SubjectComponent } from './Components/subject/subject.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
+import { NgbModule, NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, NgModel, ReactiveFormsModule } from '@angular/forms';
 import { ListComponent } from './Components/Admin/training/list/list.component';
 import { TrainingDetailsComponent } from './Components/Admin/training/training-details/training-details.component';
 import { ListPenalitiesComponent } from './Components/Admin/penality/list-penalities/list-penalities.component';
@@ -38,6 +40,12 @@ import { CountdownModule } from 'ngx-countdown';
 import { UploadComponent } from './Components/upload/upload.component';
 import { LoginComponent } from './Components/login/login.component';
 import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
+import { EventComponent } from './Components/event/event.component';
+import { ShowAllComponent } from './Components/Admin/jobOffer/show-all/show-all.component';
+import { ShowAllmoduleComponent } from './Components/show-allmodule/show-allmodule.component';
+import { ShowAllCondidComponent } from './Components/show-all-condid/show-all-condid.component';
+import { UpdateCondidacyComponent } from './Components/update-condidacy/update-condidacy.component';
+
 
 @NgModule({
   declarations: [
@@ -45,7 +53,7 @@ import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
     NavbarComponent,
     DashComponent,
     FooterComponent,
-    SubjectComponent,
+
     ListComponent,
     TrainingDetailsComponent,
     ListPenalitiesComponent,
@@ -66,6 +74,17 @@ import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
     ClotureComponent,
     UploadComponent,
     LoginComponent,
+    JackpotComponent,
+    EventComponent,
+    ShowAllComponent,
+    ShowAllmoduleComponent,
+    UpdateModuleComponent,
+    UpdateCondidacyComponent,
+    ShowAllCondidComponent,
+
+    
+   
+
    
 
 
@@ -74,6 +93,7 @@ import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
     BrowserModule,
     AppRoutingModule,
     NgbModule,
+
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
@@ -81,7 +101,7 @@ import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
     Ng2OrderModule,
     NgxPaginationModule,
     CountdownModule,
-    // RxReactiveFormsModule
+    NgbToastModule
     
     
   ],
