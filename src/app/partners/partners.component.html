@@ -1,0 +1,62 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                N
+            </th>
+            <th>
+                name
+            </th>
+            <th>
+                email
+            </th>
+            <th>
+                note
+            </th>
+            <th>
+                address
+            </th>
+            <th>
+                postalCode
+            </th>
+            <th>
+                type
+            </th>
+            <th>Disable</th>
+            <th>Delete</th>
+
+        </tr>
+    </thead>
+    <tbody>
+
+        <tr *ngFor="let t of partners;let position=index;">
+            <td>{{position+1}}
+            </td>
+            <td>{{t.name}}
+            </td>
+            <td>{{t.email}}
+            </td>
+            <td>{{t.note}}
+            </td>
+            <td>{{t.address}}
+            </td>
+            <td>{{t.postalCode}}
+            </td>
+            <td>{{t.type}}
+
+            <td>
+                <button class="btn btn-sm btn-success" *ngIf="t.desactivate"
+                    (click)="activateDesactivatePartner(t,1)">Activate</button>
+                <button class="btn btn-sm btn-danger" *ngIf="!t.desactivate"
+                    (click)="activateDesactivatePartner(t,0)">Desactivate</button>
+            </td>
+            <td>
+                <button class="btn btn-outline-danger" (click)="deleteUser(t.id)">Delete</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<div class="row justify-content-center" style="margin-top: 10%;">
+
+
+</div>

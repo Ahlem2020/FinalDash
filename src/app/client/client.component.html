@@ -1,94 +1,67 @@
-<div class="wrapper">
-    <div class="bg"></div>
+<table class="table">
+    <thead>
+      <tr>
+        <th>
+            N
+        </th>
+        <th>
+            firstName
+        </th>
+        <th>
+            lastName
+        </th>
+        <th>
+Email      
+  </th>
+  <th>
+    address      
+      </th>
+      <th>
+        postalCode      
+          </th>
+        <th>
+            phoneNumber
+        </th>  
+          <th>Disable</th>
+        <th>Delete</th>
+    
+    </tr>
+    </thead>
+    <tbody>
 
-    <!-- NAVBAR
-    =============================== -->
-    <nav class="navbar">
-      <div class="title c1">
-      </div>
+        <tr *ngFor="let t of user;let position=index;" >
+            <td>{{position+1}}
+            </td>
+            <td>{{t.firstName}}
+            </td>
+            <td>{{t.lastName}}
+            </td>
+            <td>{{t.email}}
+            </td>
+            <td>{{t.address}}
+            </td>
+            <td>{{t.postalCode}}
+            </td>  
+             <td>{{t.phoneNumber}}
+     
+            <td >
+              <button class="btn btn-sm btn-success" *ngIf="t.desactivate"(click)="activateDesactivateUser(t,1)">Activate</button>
+              <button class="btn btn-sm btn-danger" *ngIf="!t.desactivate" (click)="activateDesactivateUser(t,0)">Desactivate</button>
+            </td>
+            <td>
+                <button class="btn btn-outline-danger" (click)="deleteUser(t.id)">Delete</button>
+            </td>
+        </tr>
+    </tbody>
+  </table>
+           
+          
+               
+            
 
-      <div class="categories">
-        <ul>
-          <li>man</li>
-          <li>women</li>
-        </ul>
-      </div>
+   
 
-      <div class="menu">
-       </div>
-
-      <div class="search">
-       </div>
-    </nav>
-
-
-    <!-- SOCIAL MEDIA
-    =============================== -->
-    <div class="media">
-      <ul>
-        <li>Facebook</li>
-        <li>Twitter</li>
-        <li>Instagram</li>
-      </ul>
-    </div>
-
-
-    <!-- IMAGES
-    =============================== -->
-    <div class="img-wrapper01">
-      <div class="img01"></div>
-      <div class="block"></div>
-    </div>
-    <div class="img-wrapper02">
-      <div class="img02"></div>
-      <div class="block"></div>
-    </div>
-
-
-    <!-- TEXT
-    =============================== -->
-    <div class="text">
-        <div class="c1">
-        <img src="../../assets/img/elements/logo.png" style="width:50% ; margin-left:35%"/></div>
-
-      
-      <p>
-        <span class="hidetext"></span>
-      </p>
-    </div>
-
-
-    <!-- DESC
-    =============================== -->
-    <div class="desc">
-      <ul>
-        <li>Volume 01</li>
-        <li>Volume 02</li>
-      </ul>
-      <p>A fashion insight into leading summer styles, travel destinations to may never of thought of, a beginners guide
-        to S&M and much much more.</p>
-    </div>
+<div class="row justify-content-center" style="margin-top: 10%;">
 
 
-    <!-- SCROLLDOWN
-    =============================== -->
-    <div class="scrolldown">scroll down</div>
-
-    <!-- BOTTOMNAV
-    =============================== -->
-    <div class="bottomnav">
-      <div class="next">up next</div>
-
-      <div class="nav">
-        <ul>
-          <li>
-           </li>
-          <li>
-           </li>
-        </ul>
-
-        <div class="bottomnav-img"></div>
-      </div>
-    </div>
-
-  </div>
+</div>

@@ -1,46 +1,67 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
-import { DashComponent } from './Components/dash/dash.component';
-import { FooterComponent } from './Components/footer/footer.component';
-import { NavbarComponent } from './Components/navbar/navbar.component';
-import { SubjectComponent } from './Components/subject/subject.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ShowAllComponent } from './Components/show-all/show-all.component';
+import { HomeComponent } from './home/home.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpInterceptorService } from './service/http-interceptor.service';
+import { ReclamationComponent } from './reclamation/reclamation.component';
+import { ProfileComponent } from './profile/profile.component';
+import { AdminComponent } from './admin/admin/admin.component';
+import { ClientComponent } from './client/client.component';
+import { CalendarComponent } from './calendar/calendar.component';
+import { AddMeetingFormComponent } from './add-meeting-form/add-meeting-form.component';
+import { AvailablePartnersListComponent } from './available-partners-list/available-partners-list.component';
+import { RegisterComponent } from './register/register.component';
+import { SelectLoginComponent } from './select-login/select-login.component';
+import { LoginPartnerComponent } from './login-partner/login-partner.component';
+import { LoginAdminComponent } from './login-admin/login-admin.component';
+import { RegisterPartnerComponent } from './register-partner/register-partner.component';
+import { PartnersComponent } from './partners/partners.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { MeetRequestsComponent } from './meet-requests/meet-requests.component';
 
-import { ShowAllmoduleComponent } from './Components/show-allmodule/show-allmodule.component';
-import { UpdateModuleComponent } from './Components/update-module/update-module.component';
-import { UpdateCondidacyComponent } from './Components/update-condidacy/update-condidacy.component';
-import {  Ng2SearchPipeModule } from 'ng2-search-filter';
 @NgModule({
   declarations: [
     AppComponent,
+    HomeComponent,
     NavbarComponent,
-    DashComponent,
-    FooterComponent,
-    SubjectComponent,
-    ShowAllComponent,
-    ShowAllmoduleComponent,
-    UpdateModuleComponent,
-    UpdateCondidacyComponent,
-
-    
+    LoginComponent,
+    ReclamationComponent,
+    ProfileComponent,
+    AdminComponent,
+    ClientComponent,
+    CalendarComponent,
+    AddMeetingFormComponent,
+    AvailablePartnersListComponent,
+    RegisterComponent,
+    SelectLoginComponent,
+    LoginPartnerComponent,
+    LoginAdminComponent,
+    RegisterPartnerComponent,
+    PartnersComponent,
+    ResetPasswordComponent,
+    MeetRequestsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    NgbModule,
-    FormsModule,  
     ReactiveFormsModule,
-    Ng2SearchPipeModule
+    FormsModule,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    })
   ],
-  providers: [],
+  providers: [{provide : HTTP_INTERCEPTORS , useClass : HttpInterceptorService ,multi : true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
